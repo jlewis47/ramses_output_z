@@ -1,0 +1,12 @@
+function a2z () {
+ echo "(1./($1))-1."| sed 's/+//g'| sed  's/[eE]/*10^/g;s/ /*/' |bc -l
+}
+
+function z2a () {
+ echo "1./(1.+($1))"|bc -l
+}
+
+function outz () {
+out=$(printf "%05d" $1)
+a2z $(grep aexp output_$out/info_$out.txt | cut -d = -f 2)
+}
